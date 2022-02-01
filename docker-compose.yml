@@ -1,0 +1,31 @@
+version: '3.7' 
+services:
+  backend: 
+    build: ./Java/part2/simple-api/simple-api/
+    image: bourde/java2
+    container_name: java2
+    networks:
+      - app-network
+    depends_on:
+      - database
+  database: 
+    build: ./Database/
+    image: bourde/database
+    container_name: database
+    networks:
+      -  app-network
+    volumes:
+      - /Users/bourdier/Documents/S7/DEVOPS/TP/Database/data:/var/lib/postgresql/data
+  httpd: 
+    build: ./Httpd/
+    image: bourde/httpd
+    container_name: httpd
+    ports:
+      - 80:80
+    networks:
+      - app-network
+    depends_on:
+      - backend
+networks: 
+  app-network: 
+    external: true

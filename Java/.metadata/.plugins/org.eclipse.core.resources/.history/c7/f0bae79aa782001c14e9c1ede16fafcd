@@ -1,0 +1,5 @@
+package fr.takima.training.simpleapi.controller.copy;
+
+public class CreetingController {
+
+}
