@@ -3,6 +3,6 @@
 - name: Create App
   docker_container:
     name: java2
-    image: bourde/java2:1.0
+    image: bourde/java2:2.0
     networks:
       - name: network

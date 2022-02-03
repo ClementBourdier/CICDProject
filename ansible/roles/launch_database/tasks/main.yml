@@ -3,7 +3,7 @@
 - name: Create database
   docker_container:
     name: database
-    image: bourde/database:1.0
+    image: bourde/database:2.0
     networks:
       - name: network
     volumes:
