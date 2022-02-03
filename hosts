@@ -1,0 +1,8 @@
+
+all: 
+  vars:
+    ansible_user: centos
+    ansible_ssh_private_key_file: ./SSH/id_rsa
+  children:
+    prod:
+      hosts: clement.bourdier.takima.cloud

@@ -8,6 +8,15 @@ services:
       - app-network
     depends_on:
       - database
+  front:
+    build:
+      ./devops-front-main
+    image: bourde/front:1.1
+    container_name: front
+    networks:
+      - app-network
+    depends_on:
+      - backend
   database: 
     build: ./Database/
     image: bourde/database
@@ -18,7 +27,7 @@ services:
       - /Users/bourdier/Documents/S7/DEVOPS/TP/Database/data:/var/lib/postgresql/data
   httpd: 
     build: ./Httpd/
-    image: bourde/httpd
+    image: bourde/httpd:1.1
     container_name: httpd
     ports:
       - 80:80

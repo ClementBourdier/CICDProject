@@ -1,0 +1,10 @@
+---
+# tasks file for roles/launch_proxy
+- name: Create proxy
+  docker_container:
+    name: httpd
+    image: bourde/httpd:1.1
+    networks:
+      - name: network
+    ports:
+      - "80:80"

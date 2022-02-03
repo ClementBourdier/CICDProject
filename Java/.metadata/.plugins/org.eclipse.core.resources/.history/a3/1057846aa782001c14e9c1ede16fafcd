@@ -1,5 +1,0 @@
-package fr.takima.training.simpleapi.controller;
-
-public class GreetingController {
-
-}

@@ -1,0 +1,10 @@
+---
+# tasks file for roles/launch_database
+- name: Create database
+  docker_container:
+    name: database
+    image: bourde/database:1.0
+    networks:
+      - name: network
+    volumes:
+      - /Users/bourdier/Documents/S7/DEVOPS/TP/Database/data

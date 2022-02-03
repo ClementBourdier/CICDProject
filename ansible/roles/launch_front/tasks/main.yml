@@ -1,0 +1,8 @@
+---
+# tasks file for roles/launch_front
+- name: Launch front
+  docker_container:
+    name: front
+    image: bourde/front:1.1
+    networks:
+      - name: network 
