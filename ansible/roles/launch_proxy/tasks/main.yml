@@ -3,7 +3,7 @@
 - name: Create proxy
   docker_container:
     name: httpd
-    image: bourde/httpd:1.1
+    image: bourde/httpd:1.0
     networks:
       - name: network
     ports:

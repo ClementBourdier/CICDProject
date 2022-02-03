@@ -3,6 +3,6 @@
 - name: Launch front
   docker_container:
     name: front
-    image: bourde/front:1.1
+    image: bourde/front:1.0
     networks:
       - name: network 
