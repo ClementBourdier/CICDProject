@@ -44,7 +44,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./Java/part2/simple-api/simple-api/
           # Note: tags has to be all lower-case 
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/java2:1.0
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/java2
           push: ${{ github.ref == 'refs/heads/master' }}
         # FRONT
       - name: Build image and push front
@@ -53,7 +53,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./devops-front-main
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/front:1.0
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/front
           push: ${{ github.ref == 'refs/heads/master' }} 
 
         # DATABASE
@@ -63,7 +63,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./Database
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/database:1.0
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/database
           push: ${{ github.ref == 'refs/heads/master' }}
         # HTTPD
       - name: Build image and push httpd 
@@ -72,5 +72,5 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./Httpd
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/httpd:1.0
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/httpd
           push: ${{ github.ref == 'refs/heads/master' }}
