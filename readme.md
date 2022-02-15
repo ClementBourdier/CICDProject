@@ -6,11 +6,11 @@
 
 > Why should we run the container with a flag -e to give the environment variables ?
 
-C'est mieux car si on change les variables d'environnement, y'a pas besoin de re build l'image.
+C'est mieux car si on change les variables d'environnement, il n'y a pas besoin de re build l'image.
 
 > Why do we need a volume to be attached to our postgres container ?
 
-L'utilisation d'un volume permet de garder les données quand on redémarre un container.
+L'utilisation d'un volume permet de garder les données quand on redémarre un conteneur.
 
 > DockerFile
 ```DockerFile
@@ -22,29 +22,29 @@ ENV POSTGRES_DB=db \
     POSTGRES_PASSWORD=pwd
 ```
 
-Pour lancer mon container de base de données j'ai créer un Dockerfile dans lequel se trouve un "COPY" pour dire à mon image de charger les scripts sql nécessaire.
+Pour lancer mon container de base de données j'ai créé un Dockerfile dans lequel se trouve un "COPY" pour dire à mon image de charger les scripts SQL nécessaire.
 
-Ensuite il y'a une variable ENV qui contient mes variables d'environnements pour mon image. Il ne s'agit pas de la façon la plus sécurisé. Je pourrai utiliser l'argument -e dans la commande docker run mais il faudrait fournir à chaque commande les valeurs des variables d'environnement.
+Ensuite il y a une variable ENV qui contient mes variables d'environnements pour mon image. Il ne s'agit pas de la façon la plus sécurisée. Je pourrai utiliser l'argument -e dans la commande docker run mais il faudrait fournir à chaque commande les valeurs des variables d'environnement.
 
-Autre façon, on peut mettre nos variables d'environnement dans un fichier .env et fournir ce .env à la commande docker run avec l'argument --env-file
+Autre façon, on peut mettre nos variables d'environnement dans un fichier .env et fournir ce .env à la commande docker run avec l'argument --env-file.
 
 ### BACKEND API
 
 > Why do we need a multistage build ? And explain each steps of this dockerfile
 
-C'est une question d'optimisation. Le fait de faire en 2 étapes (build et run séparés) permet l'utilisation du jdk (Java Development Kit) pour le build, outil assez lourd et du jre (Java Runtime Environment) bien plus léger pour le run.
-Le build permet la compilation du projet Java (maven) et le run de lancer l'application
+C'est une question d'optimisation. Le fait de faire en 2 étapes (build et run séparés) permet l'utilisation du JDK (Java Development Kit) pour le build, outil assez lourd et du JRE (Java Runtime Environment) bien plus léger pour le run.
+Le build permet la compilation du projet Java (maven) et le run de lancer l'application.
 
 ### Http server
 
 > Why do we need a reverse proxy ?
 
-Le reverse proxy permet de faire un point d'entrée unique entre le client et le serveur, ce qui est plus sécurisé. Il gère donc les requêtes qu'il reçoit de la part du client puis il s'occupe de les rediger par rapport à la demande du client (ou de les bloquer s'il le client n'a pas accès à la ressource demandée).
+Le reverse proxy permet de faire un point d'entrée unique entre le client et le serveur, ce qui est plus sécurisé. Il gère donc les requêtes qu'il reçoit de la part du client puis il s'occupe de les rediriger par rapport à la demande du client (ou de les bloquer s'il le client n'a pas accès à la ressource demandée).
 
 > httpd.conf
 
 ```
-  ServerName localhost
+ServerName localhost
 <VirtualHost *:80>
     ProxyPreserveHost On
     ProxyPass /api http://java2:8080/
@@ -101,7 +101,7 @@ networks:
 
 > Why is docker-compose so important ?
 
-L'utilisation de docker-compose permet de lancer plusieurs conteneurs en une seule commande 
+L'utilisation de docker-compose permet de lancer plusieurs conteneurs en une seule commande.
 
 > Document docker-compose most important commands
 > 
@@ -136,9 +136,9 @@ La commande **mvn clean verify** permet de build le projet et de lancer les test
 
 > Unit tests ? Component test ?
 
-Unit test : C'est pour tester les fonctions que l'on a développé, voir leur réaction selon l'argument donné à la fonction (objet null ou objet de mauvais type). Ces tests sont fait par les développeurs (code)
+Unit test : C'est pour tester les fonctions que l'on a développé, voir leur réaction selon l'argument donné à la fonction (objet null ou objet de mauvais type). Ces tests sont faits par les développeurs (code).
 
-Component test : C'est pour tester le fonctionnement d'un composant (bouton, champs texte etc)
+Component test : C'est pour tester le fonctionnement d'un composant (bouton, champs texte etc).
 
 > What are testcontainers?
 
@@ -174,11 +174,11 @@ jobs:
         run: mvn clean verify --file ./Java/part2/simple-api/simple-api/pom.xml
 ```
 
-J'ai uniquement mis la branche master puisque je suis seul à travailler sur mon projet donc je n'ai pas crée d'autres branches. Pour être plus propre, j'aurai du créer une branche **dévelop** dans laquelle je faisais mes développements et dès que j'avais validé un checkpoint, j'aurai pu push dans **master** 
+J'ai uniquement mis la branche master puisque je suis seul à travailler sur mon projet donc je n'ai pas créé d'autres branches. Pour être plus propre, j'aurai dû créer une branche **dévelop** dans laquelle je faisais mes développements et dès que j'avais validé un checkpoint, j'aurais pu push dans **master**.
 
-Ensuite pour la version de Java, j'ai choisi la même que notre projet Spring (11)
+Ensuite pour la version de Java, j'ai choisi la même que notre projet Spring (11).
 
-Et pour terminer pour le run, j'ai remis la commande fournie (mvn clean verify) et je lui fourni le path du pom.xml avec l'argument --file
+Et pour terminer pour le run, j'ai remis la commande fournie (mvn clean verify) et je lui fournis le path du pom.xml avec l'argument --file.
 
 ```yml
 name: CI devops 2022 CPE 
@@ -265,11 +265,11 @@ Il faut des variables sécurisées pour ne pas les mettre dans le .main.yml et q
 
 > Why did we put needs: build-and-test-backend on this job? Maybe try without this and you will see !
 
-On doit avoir le backend de buildé et testé avant de créer l'image et de la push sur le docker hub.
+On doit avoir le backend de builder et tester avant de créer l'image et de la push sur le Docker Hub.
 
 > For what purpose do we need to push docker images?
 
-Pour versionné son code et que l'on garde des traces des anciennes versions. Mais aussi, commme dit auparavant, push les images sur le docker hub peut être utile pour d'autres developpeurs, donc c'est nécessaire de les mettre à jour.
+Pour versionné son code et que l'on garde des traces des anciennes versions. Mais aussi, comme dit auparavant, push les images sur le docker hub peut être utile pour d'autres développeurs, donc c'est nécessaire de les mettre à jour.
 
 > .main.yml avec Sonar
 
@@ -357,7 +357,7 @@ jobs:
 
 Pour ne pas avoir d'erreur il faut bien penser à mettre à OFF l'analyse automatique de SonarCloud.
 
-Pour configurer ma Quality Gate j'ai utiliser les valeurs de la Quality gate par défaut, ce qui comprend :
+Pour configurer ma Quality Gate j'ai utilisé les valeurs de la Quality gate par défaut, ce qui comprend :
 - coverage < 80%
 - duplicated lines > 3%
 - maintanability rating is worse than A
@@ -365,7 +365,7 @@ Pour configurer ma Quality Gate j'ai utiliser les valeurs de la Quality gate par
 - security sotspots reviewed < 100%
 - security rating is worse than A
   
-J'ai choisis que ma Quality Gate s'applique uniquement sur le nouveau code.
+J'ai choisi que ma Quality Gate s'applique uniquement sur le nouveau code.
 
 ## TP3
 
@@ -384,7 +384,7 @@ all:
 ```
 > Document your inventory and base commands
 
-Dans mon setup.yml, il y'a le nom de mon serveur, ainsi que le chemin pour aller à ma clé privée
+Dans mon setup.yml, il y a le nom de mon serveur, ainsi que le chemin pour aller à ma clé privée
 
 - ansible all -i inventories/setup.yml -m ping
 - ansible all -i inventories/setup.yml -m setup -a "filter=ansible_distribution*"
@@ -406,7 +406,7 @@ Dans mon setup.yml, il y'a le nom de mon serveur, ainsi que le chemin pour aller
 ```
 > Document your playbook
 
-Dans mon playbook, j'ai utilisé les rôles. Je fais donc appel aux différents rôles.
+Dans mon playbook, j'ai utilisé les rôles. Je fais donc appelle aux différents rôles.
 
 Exemple du rôle de base de données, launch_database :
 
@@ -430,9 +430,9 @@ Exemple du rôle de base de données, launch_database :
 
 > Document your docker_container tasks configuration.
 
-Pour la base de données, voir l'exemple ci-dessus
+Pour la base de données, voir l'exemple ci-dessus.
 
-> create_docker : Installe tout le nécessaire pour pouvoir run docker correctement
+> create_docker : Installe tout le nécessaire pour pouvoir run docker correctement.
 
 ```yml
 ---
@@ -473,7 +473,7 @@ Pour la base de données, voir l'exemple ci-dessus
   tags: docker
 ```
 
-> create_network : création du réseau
+> create_network : création du réseau.
 
 ```yml
 ---
@@ -483,7 +483,7 @@ Pour la base de données, voir l'exemple ci-dessus
     name: network
 ```
 
-> launcha_app : pour lancer le backend
+> launcha_app : pour lancer le backend.
 
 ```yml
 ---
@@ -496,7 +496,7 @@ Pour la base de données, voir l'exemple ci-dessus
       - name: network
 ```
 
-> launch_proxy : pour lancer le proxy
+> launch_proxy : pour lancer le proxy.
 
 ```yml
 ---
@@ -511,9 +511,9 @@ Pour la base de données, voir l'exemple ci-dessus
       - "80:80"
 ```
 
-A cette partie, nous avons pas encore fait le front mais dans la partie précédente j'ai dû créer un rôle donc je vous le mets aussi.
+À cette partie du TP, nous n'avons pas encore fait le front mais dans la partie suivante j'ai dû créer un rôle donc je vous le mets aussi.
 
-> launch_front : pour lancer le front
+> launch_front : pour lancer le front.
 
 ```yml
 ---
@@ -528,7 +528,7 @@ A cette partie, nous avons pas encore fait le front mais dans la partie précéd
 
 ### Front
 
-J'ai créer un conteneur docker à partir du DockerFile présent dans la partie front. Je l'ai tag puis push sur le docker hub.
+J'ai créé un conteneur docker à partir du DockerFile présent dans la partie front. Je l'ai tag puis push sur le docker hub.
 
 Ensuite j'ai rajouté dans le docker-compose la partie pour le front :
 
@@ -564,6 +564,6 @@ si je veux que mon front accède à mon api sur le serveur ou
 ```
 VUE_APP_API_URL=localhost/api
 ```
-si je veux que mon front accède à mon api en local
+si je veux que mon front accède à mon api en local.
 
 J'ai ensuite créer le rôle front, vu dans la partie précédente, pour le playbook.
